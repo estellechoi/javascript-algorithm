@@ -5,6 +5,7 @@
 // For example,
 // if your niece is turning years old, and the cake will have candles of height, , , ,
 // she will be able to blow out candles successfully, since the tallest candles are of height and there are such candles.
+
 // Complete the function birthdayCakeCandles in the editor below.
 // It must return an integer representing the number of candles she can blow out.
 // ar: an array of integers representing candle heights
