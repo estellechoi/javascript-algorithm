@@ -1,3 +1,5 @@
+// Print the minimum sum and maximum sum of array.
+// given five positive integers, print the sum of four items.
 'use strict';
 
 process.stdin.resume();
