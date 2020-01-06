@@ -1,4 +1,4 @@
-// If the difference between the  and the next multiple of  is less than , round  up to the next multiple of .
+// If the difference between the  and the next multiple of 5 is less than 3, round  up to the next multiple of 5.
 // If the value of  is less than , no rounding occurs as the result will still be a failing grade.
 
 'use strict';
