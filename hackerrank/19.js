@@ -50,7 +50,6 @@ function getMoneySpent(keyboards, drives, b) {
 		return moneySpent;
 	}
 
-
 	// sorting desc
 	// keyboards.sort(function (a, b) {
 	// 	return b - a;
