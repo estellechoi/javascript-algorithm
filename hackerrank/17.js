@@ -30,32 +30,24 @@ function readLine() {
  * Complete the pageCount function below.
  */
 function pageCount(n, p) {
-
 	let flip = 0;
-
 	// from the start
 	if (p <= (n / 2)) {
-		var pageCount = 1;
-		while (pageCount < p) {
-			flip++; // 1 2 3
-			pageCount += 2; // 3 5 7
+		var page = 1;
+		while (page < p) {
+			flip++;
+			page += 2;
 		}
 	}
 	// from the last
 	else {
-		var pageCount = n;
-		if (n % 2 === 0) {
-			pageCount = n - 1;
-			// 페이지 6 ... 목표가 3 ?
-			while (pageCount > p) {
-				flip++;
-				pageCount -= 2;
-			}
-		} else {
-			while (pageCount > p) {
-				flip++;
-				pageCount -= 2;
-			}
+		var page = n;
+		if (n % 2 !== 0) {
+			page = page - 1; // 책장을 넘겼을 때 페이지 중 숫자가 더 작은 페이지
+		}
+		while (page > p) {
+			flip++;
+			page -= 2;
 		}
 	}
 
