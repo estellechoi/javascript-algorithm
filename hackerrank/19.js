@@ -32,40 +32,62 @@ function readLine() {
  * Complete the getMoneySpent function below.
  */
 function getMoneySpent(keyboards, drives, b) {
-	// sorting
-	keyboards.sort(function (a, b) {
-		return a - b;
-	});
-	drives.sort(function (a, b) {
-		return a - b;
-	});
-
-	let moneySpent = -1;
-	if (keyboards[0] + drives[0] > b) {
+	let moneySpent = 0;
+	for (let i = 0; i < keyboards.length; i++) {
+		for (let j = 0; j < drives.length; j++) {
+			// 모든 가격을 하나씩 짝지어본다. (정렬도 필요없게되는 것 ...)
+			let amount = keyboards[i] + drives[j];
+			// 예산 내의 값이면서, 최대 값을 구하면 된다.
+			if (amount <= b && amount > moneySpent) {
+				moneySpent = amount;
+			}
+		}
+	}
+	// 모든 값이 예산 밖이라면 -1 반환
+	if (moneySpent === 0) {
+		return -1;
+	} else {
 		return moneySpent;
 	}
 
-	let k = keyboards.length - 1;
-	let d = drives.length - 1;
-	moneySpent = keyboards[k] + drives[d];
-	while (moneySpent > b) {
-		if (k !== 0) {
-			k--;
-			moneySpent = keyboards[k] + drives[d];
-			if (moneySpent <= b) {
-				break;
-			}
-		}
-		if (d !== 0) {
-			d--;
-			moneySpent = keyboards[k] + drives[d];
-			if (moneySpent <= b) {
-				break;
-			}
-		}
-	}
 
-	return moneySpent;
+	// sorting desc
+	// keyboards.sort(function (a, b) {
+	// 	return b - a;
+	// });
+	// drives.sort(function (a, b) {
+	// 	return b - a;
+	// });
+	//
+	// let moneySpent = -1;
+	// const k = keyboards.length - 1;
+	// const d = drives.length - 1;
+	// if (keyboards[k] + drives[d] > b) {
+	// 	return moneySpent;
+	// }
+	//
+	// let i = 0;
+	// let j = 0;
+	// moneySpent = keyboards[i] + drives[j];
+	//
+	// while (moneySpent > b) {
+	// 	if (i === k) {
+	// 		j++;
+	// 	} else if (j === d) {
+	// 		i++;
+	// 	} else {
+	// 		var diffK = keyboards[i] - keyboards[i + 1];
+	// 		var diffD = drives[j] - drives[j + 1];
+	// 		if (diffK < diffD) {
+	// 			i++;
+	// 		} else {
+	// 			j++;
+	// 		}
+	// 	}
+	// 	moneySpent = keyboards[i] + drives[j];
+	// }
+	//
+	// return moneySpent;
 }
 
 function main() {
