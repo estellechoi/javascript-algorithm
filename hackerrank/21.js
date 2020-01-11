@@ -34,41 +34,20 @@ function readLine() {
 
 // Complete the formingMagicSquare function below.
 function formingMagicSquare(s) {
-	// s[i][j]
-	let sum = 0;
-	for (var i = 0; i < 3; i++) {
-		for (var j = 0; j < 3; j++) {
+	const n = s.length;
+	const magicNumber = Math.floor((n * ((n * n) + 1)) / 2);
+
+	let change = 0;
+	for (var i = 0; i < n; i++) {
+		var sum = 0;
+		for (var j = 0; j < n; j++) {
 			sum += s[i][j];
 		}
-	}
-	const magic = Math.round(sum / 3);
-
-	var diff = 0;
-	var diagonal1 = 0;
-	var diagonal2 = 0;
-	for (var i = 0; i < 3; i++) {
-		var horizon = 0;
-		for (var j = 0; j < 3; j++) {
-			horizon += s[i][j];
-			if (i === j) {
-				diagonal1 += s[i][j];
-			}
-			if (i + j === 2) {
-				diagonal2 += s[i][j];
-			}
-		}
-		if (horizon !== magic) {
-			diff += Math.abs(horizon - magic);
-		}
-		if (diagonal1 !== magic) {
-			diff += Math.abs(diagonal1 - magic);
-		}
-		if (diagonal2 !== magic) {
-			diff += Math.abs(diagonal2 - magic);
+		if (sum !== magicNumber) {
+			change += Math.abs(magicNumber - sum);
 		}
 	}
 
-	return diff;
 
 }
 
