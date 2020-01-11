@@ -38,11 +38,11 @@ function pickingNumbers(a) {
 	let max = 1;
 
 	for (var i = 0; i < alength; i++) {
-		var temp = a[i];
 		let count = 1;
 		for (var j = 0; j < alength; j++) {
 			if (j === i) continue;
-			var diff = a[j] - temp;
+			var diff = a[j] - a[i];
+			// 절대값으로 하면 차이가 2인 숫자 발생
 			if (diff === 1 || diff === 0) {
 				count++;
 				if (count > max) {
