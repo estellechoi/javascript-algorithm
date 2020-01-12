@@ -38,21 +38,29 @@ function climbingLeaderboard(scores, alice) {
 	let res = [];
 	const slength = scores.length;
 
+	// 중복원소가 제거된 점수배열 만들기
+	let temp = scores[0];
+	let arr = [temp];
+	scores.forEach(function (score, i) {
+		if (i === slength - 1) return true;
+		// 중복원소 제거
+		if (score !== scores[i + 1]) {
+			temp = scores[i + 1];
+			arr.push(temp);
+		}
+	});
+
+	let arrlength = arr.length;
 	alice.forEach(function (ali, j) {
-		var rank = 1;
-		scores.some(function (score, i) {
-			if (ali >= score) {
-				res.push(rank);
+		arr.some(function (value, i) {
+			if (ali >= value) {
+				res.push(i + 1); // 순위 : index + 1
 				return true; // break
 			}
 			// Alice가 마지막 순위일 때
-			if (i === slength - 1) {
-				rank++;
-				res.push(rank);
+			if (i === arrlength - 1) {
+				res.push(i + 2);
 				return true;
-			}
-			if (score !== scores[i + 1]) {
-				rank++;
 			}
 		});
 	});
