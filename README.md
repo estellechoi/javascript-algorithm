@@ -1,2 +1,3 @@
-# javascript-algorithm
-[Hackerrank] JavaScript 알고리즘 풀기
+# Hackerrank Challenge
+
+- [Save the Prisoner!](https://github.com/estellechoi/javascript-algorithm/blob/master/hackerrank/easy/30.js)
