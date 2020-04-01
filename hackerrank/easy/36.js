@@ -35,9 +35,6 @@ function readLine() {
 
 // Complete the appendAndDelete function below.
 function appendAndDelete(s, t, k) {
-	const init = s.split("");
-	const wanted = t.split("");
-
 	/*
     let i = null;
     const isDiff = init.some((item, index) => {
@@ -51,17 +48,15 @@ function appendAndDelete(s, t, k) {
         }
     }
 */
+	const init = s.split("");
+	const wanted = t.split("");
 
 	let i = -1;
 	const isDiff = init.some((item, index) => {
 		i = index - 1;
 		if (wanted[index]) {
-			if (item !== wanted[index]) {
-				return true;
-			}
-		} else {
-			return true;
-		}
+			if (item !== wanted[index]) return true;
+		} else return true;
 	});
 
 	if (!isDiff) i = init.length - 1;
@@ -73,18 +68,12 @@ function appendAndDelete(s, t, k) {
 	let result = "Yes";
 	if (count < k) {
 		if (i !== -1) {
-			// 더 수정해야하는 횟수
 			const extra = k - count;
 			if (extra % 2 !== 0) {
-				// 일치하는 문자의 수 : i + 1
-				if (extra < (i + 1) * 2) {
-					result = "No";
-				}
+				if (extra < (i + 1) * 2) result = "No"; // 일치하는 문자의 수 : i + 1
 			}
 		}
-	} else if (count > k) {
-		result = "No";
-	}
+	} else if (count > k) result = "No";
 
 	return result;
 }
