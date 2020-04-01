@@ -54,13 +54,12 @@ function appendAndDelete(s, t, k) {
 
 	let i = -1;
 	const isDiff = init.some((item, index) => {
+		i = index - 1;
 		if (wanted[index]) {
 			if (item !== wanted[index]) {
-				i = index - 1;
 				return true;
 			}
 		} else {
-			i = index - 1;
 			return true;
 		}
 	});
