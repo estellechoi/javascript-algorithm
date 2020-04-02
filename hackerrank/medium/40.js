@@ -51,6 +51,22 @@ function readLine() {
  * The function accepts following parameters:
  *  1. INTEGER k
  *  2. INTEGER_ARRAY s
+
+ * 1 7 2 4
+
+    1 + 7 = 8
+    1 + 2 = 3 !!!
+    1 + 4 = 5
+    7 + 2 = 9 !!!
+    7 + 4 = 11
+    2 + 4 = 6 !!!
+
+    suspect = {
+        1: 1,
+        7: 1,
+        2: 3,
+        4: 1
+    }
  */
 
 function nonDivisibleSubset(k, s) {
