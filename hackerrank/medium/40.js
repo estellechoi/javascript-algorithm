@@ -18,6 +18,24 @@ s.forEach((item, index) => {
 });
 
 const result = Object.keys(suspect).filter(item => suspect[item] <= 1).length;
+
+
+	let isDivisible = true;
+	let test = s;
+	while (isDivisible) {
+		isDivisible = test.some((item, index) => {
+			for (let i = index + 1; i < test.length; i++) {
+				return (item + s[i]) % k === 0;
+			}
+		});
+		if (!isDivisible) break;
+
+		// test 조작...
+		test = s.slice(0, 1);
+	}
+
+	return test.length;
+
 */
 
 "use strict";
@@ -30,11 +48,11 @@ process.stdin.setEncoding("utf-8");
 let inputString = "";
 let currentLine = 0;
 
-process.stdin.on("data", function(inputStdin) {
+process.stdin.on("data", function (inputStdin) {
 	inputString += inputStdin;
 });
 
-process.stdin.on("end", function() {
+process.stdin.on("end", function () {
 	inputString = inputString.split("\n");
 
 	main();
@@ -73,15 +91,19 @@ function nonDivisibleSubset(k, s) {
 	let isDivisible = true;
 	let test = s;
 	while (isDivisible) {
-		isDivisible = test.some((item, index) => {
-			for (let i = index + 1; i < test.length; i++) {
-				return (item + s[i]) % k === 0;
+		isDivisible = false;
+		for (let i = 0; i < test.length - 1; i++) {
+			for (let j = i + 1; j < test.length; j++) {
+				if ((test[i] + test[j]) % k === 0) {
+					// test 를 조작하는 것만 해결하면 됨 .....
+					// test = test.filter((item, index) => j !== index);
+					test.splice(j, 1);
+					isDivisible = true;
+					break;
+				}
 			}
-		});
-		if (!isDivisible) break;
-
-		// test 조작...
-		test = s.slice(0, 1);
+			if (isDivisible) break;
+		}
 	}
 
 	return test.length;
@@ -90,9 +112,7 @@ function nonDivisibleSubset(k, s) {
 function main() {
 	const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-	const firstMultipleInput = readLine()
-		.replace(/\s+$/g, "")
-		.split(" ");
+	const firstMultipleInput = readLine().replace(/\s+$/g, "").split(" ");
 
 	const n = parseInt(firstMultipleInput[0], 10);
 
@@ -101,7 +121,7 @@ function main() {
 	const s = readLine()
 		.replace(/\s+$/g, "")
 		.split(" ")
-		.map(sTemp => parseInt(sTemp, 10));
+		.map((sTemp) => parseInt(sTemp, 10));
 
 	const result = nonDivisibleSubset(k, s);
 
