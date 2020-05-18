@@ -1,10 +1,6 @@
-// Forming a Magic Square
-// We define a magic square to be an n * n matrix of distinct positive integers from 1 to n*n
-// where the sum of any row, column, or diagonal of length n is always equal to the same number: the magic constant.
-// You will be given a 3 * 3 matrix s of integers in the inclusive range [1, 9]
-// We can convert any digit a to any other digit b in the range [1, 9] at cost of |a - b|.
-// Given s, convert it into a magic square at minimal cost. Print this cost on a new line.
-// Note : The resulting magic square must contain distinct integers in the inclusive range[1, 9].
+// Repeated String
+// Lilah has a string, s, of lowercase English letters that she repeated infinitely many times.
+// Given an integer, , find and print the number of letter a's in the first n letters of Lilah's infinite string.
 
 "use strict";
 
@@ -20,7 +16,7 @@ process.stdin.on("data", (inputStdin) => {
 	inputString += inputStdin;
 });
 
-process.stdin.on("end", function () {
+process.stdin.on("end", (_) => {
 	inputString = inputString
 		.replace(/\s*$/, "")
 		.split("\n")
@@ -33,35 +29,40 @@ function readLine() {
 	return inputString[currentLine++];
 }
 
-// Complete the formingMagicSquare function below.
-function formingMagicSquare(s) {
-	const n = s.length;
-	const magicNumber = Math.floor((n * (n * n + 1)) / 2);
+// Complete the repeatedString function below.
+function repeatedString(s, n) {
+	const length = s.length;
+	const split = s.split("");
 
-	let change = 0;
-	for (var i = 0; i < n; i++) {
-		var sum = 0;
-		for (var j = 0; j < n; j++) {
-			sum += s[i][j];
+	let count = 0;
+	if (length >= n) {
+		for (let i = 0; i < n; i++) {
+			if (split[i] === "a") count += 1;
 		}
-		if (sum !== magicNumber) {
-			change += Math.abs(magicNumber - sum);
-		}
+		return count;
 	}
+
+	while (s.length < n) {
+		s = s + s;
+	}
+	const exceed = s.length - n;
+	s = s.slice(0, s.length - exceed);
+
+	s.split("").forEach((item) => {
+		if (item === "a") count += 1;
+	});
+
+	return count;
 }
 
 function main() {
 	const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
 
-	let s = Array(3);
+	const s = readLine();
 
-	for (let i = 0; i < 3; i++) {
-		s[i] = readLine()
-			.split(" ")
-			.map((sTemp) => parseInt(sTemp, 10));
-	}
+	const n = parseInt(readLine(), 10);
 
-	const result = formingMagicSquare(s);
+	let result = repeatedString(s, n);
 
 	ws.write(result + "\n");
 
