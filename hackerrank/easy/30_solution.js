@@ -5,7 +5,6 @@
 // Beginning with the prisoner in that chair, one candy will be handed to each prisoner sequentially around the table until all have been distributed.
 // The jailer is playing a little joke, though. The last piece of candy looks like all the others, but it tastes awful.
 // Determine the chair number occupied by the prisoner who will receive that candy.
-// https://www.hackerrank.com/challenges/save-the-prisoner/problem
 
 'use strict';
 
@@ -35,18 +34,11 @@ function readLine() {
 
 // Complete the saveThePrisoner function below.
 function saveThePrisoner(n, m, s) {
+	// 1) 좌석의 숫자가 무한대라고 가정하고, 마지막 캔디가 주어지는 좌석의 숫자를 구하면 m - 1 + s
+	// 2) 가상의 마지막 좌석의 숫자 -> 총 좌석수로 나누어 떨어지지 않으면, 그 나머지 숫자가 당첨 좌석.
+	// 3) 가상의 마지막 좌석의 숫자 -> 총 좌석수로 나누어 떨어지면 마지막 좌석이 당첨. 
 
-    let current = s;
-	
-	// 캔디의 수만큼 반복하면서 현재 좌석의 숫자를 구했다....ㅠ
-    for (let i = 1; i <= m; i++) {
-        // give candy at current position.
-		if (i === m) return current;
-		
-		// get next seat no.
-        if (current >= n) current = 1;
-        else current += 1;
-    }
+	return (m - 1 + s) % n || n;
 
 }
 
